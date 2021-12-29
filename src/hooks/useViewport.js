@@ -1,4 +1,5 @@
 import React, { memo, useState, useEffect, useContext } from 'react';
+import throttle from '@utils/throttle';
 
 const viewportContext = React.createContext({});
 
@@ -11,10 +12,12 @@ export const ViewportProvider = memo( ({ children }) => {
         setHeight(window.innerHeight);
     };
 
+    const throttleResizeHandler = throttle(resizeHandler, 300);
+
     useEffect(() => {
-        window.addEventListener('resize', resizeHandler);
+        window.addEventListener('resize', throttleResizeHandler);
         return () => {
-            window.removeEventListener('resize', resizeHandler);
+            window.removeEventListener('resize', throttleResizeHandler);
         }
     }, [])
 

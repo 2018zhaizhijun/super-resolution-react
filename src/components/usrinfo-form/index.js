@@ -20,17 +20,30 @@ const layout = {
         },
     },
 };
-const buttonLayout = {
+const editButtonLayout = {
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { 
+            offset: 9,
+            span: 8,
+        },
+        // md: {
+        //     offset: 9,
+        //     span: 8,
+        // },
+    },
+};
+const saveButtonLayout = {
     wrapperCol: {
         xs: { span: 24 },
         sm: { 
             offset: 9,
             span: 10,
         },
-        md: {
-            offset: 9,
-            span: 8,
-        },
+        // md: {
+        //     offset: 9,
+        //     span: 8,
+        // },
     },
 };
 
@@ -161,7 +174,7 @@ export default memo(function UsrinfoForm() {
                 </div>
             </Form.Item>
 
-            <Form.Item {...buttonLayout}>
+            <Form.Item {...editButtonLayout}>
                 <Button onClick={()=>handleEdit()} 
                   size="middle" block icon={<EditOutlined />}
                   className={usrinfoFormStyle.editButton}>
@@ -214,7 +227,7 @@ export default memo(function UsrinfoForm() {
                 </Radio.Group>
             </Form.Item>
 
-            <Form.Item {...buttonLayout}>
+            <Form.Item {...saveButtonLayout}>
                 <Button type="primary" onClick={()=>handleCancelEdit()} 
                   size="middle" style={{marginRight: '20px'}}
                   className={usrinfoFormStyle.saveButton}>
