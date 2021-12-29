@@ -1,0 +1,6 @@
+export const CHANGE_IS_VISIBLE = 'login/CHANGE_IS_VISIBLE';
+//export const CHANGE_REGISTER_STATE = 'login/CHANGE_REGISTER_STATE';
+export const CHANGE_LOGIN_STATE = 'login/CHANGE_USER_LOGIN_STATE';
+export const CHANGE_AVATAR = 'login/CHANGE_AVATAR';
+export const CHANGE_PROFILE = 'login/CHANGE_PROFILE_INFO';
+export const CHANGE_TOKEN = 'login/CHANGE_PROFILE_TOKEN';

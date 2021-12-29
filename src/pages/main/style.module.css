@@ -1,0 +1,10 @@
+.header {
+    position: fixed;
+}
+
+.content {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 60px);
+    top: 60px;
+}

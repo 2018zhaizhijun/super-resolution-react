@@ -1,0 +1,44 @@
+.usrinfoWrapper {
+    margin: 0 20px;
+}
+
+.editButton {
+    margin-top: 20px;
+}
+
+.saveButton {
+    /* display: inline; */
+    width: 40%;
+    background-color: rgb(154, 179, 162);
+    border: none;
+    margin-top: 20px;
+}
+
+.saveButton:hover {
+    background-color: rgb(125, 156, 135);
+}
+
+.uploadButton {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.radioButton {
+    border-color: #525252 !important ;
+}
+
+.radioButton:after{
+    background-color: #525252;
+}
+
+.radioButton:hover .radioButton {
+    border-color: #525252 ;
+}
+
+.borderedLabel {
+    text-indent: 1rem;
+    width: 100%;
+    line-height: 1.8rem;
+    border: 1px solid #aaaaaad2;
+    background-color: #f9f9f9e3;
+}

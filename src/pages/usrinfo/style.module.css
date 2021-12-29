@@ -1,0 +1,30 @@
+.formWrapper {
+    margin: 0 auto;
+    padding-top: 40px;
+    width: 80%;
+    height: 100%;
+}
+
+@media (min-width: 470px) {
+    .formWrapper {
+        width: 80%;
+        height: auto;
+        padding-top: 30px;
+        margin-top: 40px;
+        padding-bottom: 20px;
+        background-color: rgba(255, 255, 255, 0.767);
+        box-shadow: 1px 1px 2px 2px #eeeded;
+    }
+}
+
+@media (min-width: 575px) {
+    .formWrapper {
+        width: 60%;
+        height: auto;
+        margin-top: 70px;
+        padding-top: 40px;
+        padding-bottom: 20px;
+        background-color: rgba(255, 255, 255, 0.767);
+        box-shadow: 1px 1px 2px 2px #eeeded;
+    }
+}
