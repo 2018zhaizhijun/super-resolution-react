@@ -25,6 +25,7 @@ export default memo(function MainHeader(props) {
         return (
             <NavLink
                 key={item.title}
+                id={item.discribe}
                 to={item.link}
                 className={className}
                 activeClassName="active-link"
@@ -116,7 +117,7 @@ export default memo(function MainHeader(props) {
             <div className="usr-menu">
                 {isLogin ? 
                 (<Dropdown overlay={profileDownMenu}>
-                    <div className="drop-menu">
+                    <div className="drop-menu" data-testid="dropMenu">
                         <img src={typeof profile.avatarUrl === 'string' && profile.avatarUrl.length>0 ? 
                                   profile.avatarUrl : 
                                   require("@assets/img/login.jpg")} 

@@ -11,7 +11,8 @@ const { Dragger } = Upload;
 
 export default memo(function TransBlock() {
     const [filelist, setFilelist] = useState([]);
-    let ref = useRef();
+    let fileListRef = useRef();
+    let draggerRef = useRef();
     const dispatch = useDispatch();
     const { isLogin } = useSelector(
         state => ({
@@ -29,47 +30,53 @@ export default memo(function TransBlock() {
 
         //console.log(file);
         file.status = "uploading";
-        const filelistNew = [...ref.current, file];
+        const filelistNew = [...fileListRef.current, file];
         setFilelist(filelistNew);
-        ref.current = filelistNew;
+        fileListRef.current = filelistNew;
             
         if (fileType === 'image') {
             uploadImage(file, onUploadProgress).then((res) => {
+                if (res.statusCode != 200){
+                    throw new Error('uploadImage statusCode:' + res.statusCode);
+                }
                 setTimeout(() => {
                     //console.log(file);
                     onSuccess(res, file);
-                    let filelistCopy = ref.current.slice(0);
+                    let filelistCopy = fileListRef.current.slice(0);
                     //console.log(filelistCopy);
                     for (let fileitem of filelistCopy) {
                         if (fileitem.uid === file.uid) {
                             fileitem.url = BASE_URL+res.data[1];
                             fileitem.status = "done";
                             setFilelist(filelistCopy);
-                            ref.current = filelistCopy;
+                            fileListRef.current = filelistCopy;
                         }
                     }
                 }, 12000);
-            }).catch((e, res) => {
-                onError(e, res);
+            }).catch((e) => {
+                onError(e);
                 message.error(file.name+"上传失败");
             });
         }
         else if (fileType === 'video') {
             uploadVideo(file, onUploadProgress).then((res) => {
+                if (res.statusCode != 200){
+                    throw new Error('uploadVideo statusCode:' + res.statusCode);
+                }
                 setTimeout(() => {
                     onSuccess(res, file);
-                    let filelistCopy = ref.current.slice(0);
+                    let filelistCopy = fileListRef.current.slice(0);
                     for (let fileitem of filelistCopy) {
                         if (fileitem.uid === file.uid) {
                             fileitem.url = BASE_URL+res.data[1];
                             fileitem.status = "done";
                             setFilelist(filelistCopy);
-                            ref.current = filelistCopy;
+                            fileListRef.current = filelistCopy;
                         }
                     }
                 }, 180*1000);
-            }).catch((e, res) => {
-                onError(e, res);
+            }).catch((e) => {
+                onError(e);
                 message.error(file.name+"上传失败");
             });
         }
@@ -123,36 +130,40 @@ export default memo(function TransBlock() {
     };
     
     useEffect(() => {
-        let elem = document.getElementById('draggerWrapper');
+        //let elem = document.getElementById('draggerWrapper');
+        let elem = draggerRef.current;
 
         if (!isLogin) {
-            elem.addEventListener('click', eventHandler, true);
+            //elem.addEventListener('click', eventHandler, true);
+            elem.onClickCapture = eventHandler;
         }
         else {
             //removeEventListener中也要填入与addEventListener一样的useCapture参数
-            elem.removeEventListener('click', eventHandler, true);
+            //elem.removeEventListener('click', eventHandler, true);
+            elem.onClickCapture = null;
         }
 
         return () => {
-            try {
-                elem.removeEventListener('click', eventHandler, true);
-            } catch(e) {}
+            // try {
+            //     elem.removeEventListener('click', eventHandler, true);
+            // } catch(e) {}
+            elem.onClickCapture = null;
         }
     }, [isLogin]);
 
     useEffect(() => {
-        ref.current = filelist;
+        fileListRef.current = filelist;
     });
 
     const onChange = ({ file, fileList }) => {
         console.log(file, fileList);
         setFilelist(fileList);
-        ref.current = fileList;
+        fileListRef.current = fileList;
     };
 
     return (
       <TransWrapper>
-        <div id="draggerWrapper" className="draggerArea">
+        <div id="draggerWrapper" className="draggerArea" ref={draggerRef}>
             <Dragger {...props}>
                 <p className="ant-upload-drag-icon">
                     <UploadOutlined />

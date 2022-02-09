@@ -25,9 +25,12 @@ function HistItem(props) {
                 deleteCallback();
             }
             else {
-                message.error("历史记录删除失败");
+                throw new Error('statusCode' + res.statusCode);
             }
-        });
+        }).catch((e) => {
+            console.error('deleteHistError', e);
+            message.error("历史记录删除失败");
+        })
     };
 
     const showGridItem = (fileUrl, type) => {
@@ -64,8 +67,8 @@ function HistItem(props) {
     );
 }
 
-export default memo(function HistList() {
-    const [histList, setHistList] = useState([]);
+export default memo(function HistList({ initialList=[] }) {
+    const [histList, setHistList] = useState(initialList);
 
     const showHistItem = (item, index) => {
         const itemProps = {
@@ -89,7 +92,10 @@ export default memo(function HistList() {
         getHistList().then((data) => {
             //console.log(data);
             setHistList(data);
-        });
+        }).catch((e) => {
+            console.error('getHistListError', e);
+            message.error("历史记录获取失败");
+        })
     }, []);
 
     return (

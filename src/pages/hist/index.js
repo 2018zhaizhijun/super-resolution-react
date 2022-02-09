@@ -12,12 +12,15 @@ export default memo(function Hist(props) {
 
     useEffect(() => {
         if (!isLogin) {
-            window.location.href = '/#/main/transform';
+            //window.location.href = '/main/transform';
+            props.history.replace({
+                pathname: '/main/transform'
+            })
         }
     }, [isLogin])
 
     return (
-        <div>
+        <div className='histPage'>
             <HistList />
         </div>
     );

@@ -1,5 +1,4 @@
 import request from './request';
-import qs from 'qs';
 
 export const phoneLogin = (telephone, password) => {
     return request({

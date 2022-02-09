@@ -1,19 +1,21 @@
 import React, { memo } from 'react';
 import { Provider } from 'react-redux';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import store from './store';
 import routes from './router';
 import { ViewportProvider } from '@hooks/useViewport';
 
-export default memo(function App() {
+export default memo(function App({testStore=null}) {
     return (
-        <Provider store={store}>
+        <React.StrictMode>
+        <Provider store={testStore?testStore:store}>
             <ViewportProvider>
-                <HashRouter>
+                <BrowserRouter>
                     { renderRoutes(routes) }
-                </HashRouter>
+                </BrowserRouter>
             </ViewportProvider>
         </Provider>
+        </React.StrictMode>
     );
 });

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`side bar render side bar should match snapshot 1`] = `
+<div
+  className="sc-bdvvtL bHgvbk sidebarWrapper"
+  style={
+    Object {
+      "left": "-100%",
+    }
+  }
+>
+  <a
+    aria-current={null}
+    className="sidebar-link"
+    href="/main/transform"
+    id="toTransPage"
+    onClick={[Function]}
+  >
+    <span>
+      超分转换
+    </span>
+  </a>
+  <a
+    aria-current={null}
+    className="sidebar-link"
+    href="/main/discribe"
+    id="toIntroPage"
+    onClick={[Function]}
+  >
+    <span>
+      功能简介
+    </span>
+  </a>
+</div>
+`;

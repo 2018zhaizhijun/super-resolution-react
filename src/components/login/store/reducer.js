@@ -17,17 +17,17 @@ const defaultState = Map({
 function reducer(state=defaultState, action) {
     switch (action.type) {
         case actionTypes.CHANGE_IS_VISIBLE:
-            return state.set('isVisible', action.isVisible);
+            return state.set('isVisible', action.payload);
         // case actionTypes.CHANGE_REGISTER_STATE:
         //     return state.set('registering', action.registering);
         case actionTypes.CHANGE_LOGIN_STATE:
-            return state.set('isLogin', action.isLogin);
+            return state.set('isLogin', action.payload);
         // case actionTypes.CHANGE_AVATAR:
         //     return state.set('avatarUrl', action.avatarUrl);
         case actionTypes.CHANGE_PROFILE:
-            return state.set('profile', {...state.get('profile'), ...action.profile});
+            return state.set('profile', {...state.get('profile'), ...action.payload});
         case actionTypes.CHANGE_TOKEN:
-            return state.set('token', action.token);
+            return state.set('token', action.payload);
         default:
             return state;
     }

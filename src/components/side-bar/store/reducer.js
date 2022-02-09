@@ -8,7 +8,7 @@ const defaultState = Map({
 function reducer(state=defaultState, action) {
     switch (action.type) {
         case actionTypes.CHANGE_IS_VISIBLE:
-            return state.set('isVisible', action.isVisible);
+            return state.set('isVisible', action.payload);
         default:
             return state;
     }

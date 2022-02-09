@@ -14,6 +14,7 @@ export default memo(function SideBar() {
     const showLinkItem = (item, index, className) => {
         return (
             <NavLink
+                id={item.discribe}
                 key={item.title}
                 to={item.link}
                 className={className}

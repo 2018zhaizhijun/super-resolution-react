@@ -4,6 +4,7 @@ import Trans from '@pages/trans';
 import Intro from '@pages/intro';
 import Hist from '@pages/hist';
 import UsrInfo from '@pages/usrinfo';
+import Page404 from '@pages/page404';
 
 const routes = [
     { path: '/', exact: true, render: () => <Redirect to='/main' /> },
@@ -15,9 +16,11 @@ const routes = [
         { path: '/main/transform', component: Trans },
         { path: '/main/discribe', component: Intro },
         { path: '/main/history', component: Hist },
-        { path: '/main/usrInfo', component: UsrInfo }
+        { path: '/main/usrInfo', component: UsrInfo },
+        { path: '*', component: Page404 },
       ]
     },
+    { path: '*', component: Page404 },
 ];
 
 export default routes;

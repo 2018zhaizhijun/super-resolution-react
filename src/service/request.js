@@ -16,7 +16,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
     config => {
-        NProgress.start();
+        //NProgress.start();
         return config;
     },
     error => {
@@ -26,7 +26,7 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
     response => {
-        NProgress.done();
+        //NProgress.done();
         return response.data;
     },
     error => {

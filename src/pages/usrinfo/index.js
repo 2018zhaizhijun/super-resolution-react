@@ -13,12 +13,15 @@ export default memo(function UsrInfo(props) {
 
     useEffect(() => {
         if (!isLogin) {
-            window.location.href = '/#/main/transform';
+            //window.location.assign('/main/transform');
+            props.history.replace({
+                pathname: '/main/transform'
+            })
         }
     }, [isLogin])
 
     return (
-        <div className={formStyle.formWrapper} >
+        <div className={formStyle.formWrapper+' usrinfoPage'} >
             <UsrinfoForm />
         </div>
     );

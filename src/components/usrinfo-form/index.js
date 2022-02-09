@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { Form, Input, Button, message, Radio, Upload } from 'antd';
 import { UploadOutlined, EditOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
@@ -53,8 +53,8 @@ const saveButtonLayout = {
 //     reader.readAsDataURL(img);
 // };
 
-export default memo(function UsrinfoForm() {
-    const [editing, setEditing] = useState(false);
+export default memo(function UsrinfoForm({ isEditing=false }) {
+    const [editing, setEditing] = useState(isEditing);
     const dispatch = useDispatch();
     const { profile } = useSelector(
       state => ({
@@ -69,7 +69,7 @@ export default memo(function UsrinfoForm() {
         sendUsrinfo(avatarNew, usrname, sex).then((res) => {
             console.log(res);
             if (res.statusCode != 200) {
-                message.error('用户信息更新失败');
+                throw new Error('statusCode' + res.statusCode);
             }
             else {
                 message.success('用户信息更新成功');
@@ -80,16 +80,15 @@ export default memo(function UsrinfoForm() {
                 }));
                 setEditing(false);
             }
-        });
+        }).catch((e) => {
+            console.error('sendUsrinfoError', e);
+            message.error('用户信息更新失败');
+        })
     };
 
     const handleEdit = () => {
         setEditing(true);
         setAvatarNew(avatarUrl);
-        editFormRef.current.setFieldsValue({
-            usrname: profile.usrname,
-            sex: profile.sex,
-        });
     };
     const handleCancelEdit = () => {
         setEditing(false);
@@ -125,6 +124,15 @@ export default memo(function UsrinfoForm() {
         }
     };
 
+    useEffect(() => {
+        if(editing){
+            editFormRef.current.setFieldsValue({
+                usrname: profile.usrname,
+                sex: profile.sex,
+            });
+        }
+    }, [editing]);
+
     const props = {
         maxCount: 1,
         showUploadList: false,
@@ -143,102 +151,111 @@ export default memo(function UsrinfoForm() {
 
     return (
       <div className={usrinfoFormStyle.usrinfoWrapper}>
-        <Form 
-          style={{
-              display: editing ? 'none' : 'block',
-          }}
-          {...layout}
-        >
-            <Form.Item label="用户头像" >
-                <img className="avatar"  height="120"
-                  src={ typeof avatarUrl === 'string' && avatarUrl.length>0 ? 
-                        avatarUrl : require("@assets/img/login.jpg") } 
-                  alt="avatar" />
-            </Form.Item>
+        {
+        !editing ?
+            <Form 
+            //   style={{
+            //       display: editing ? 'none' : 'block',
+            //   }}
+            className='infoForm'
+            {...layout}
+            >
+                <Form.Item label="用户头像" >
+                    <img className="avatar"  height="120"
+                    src={ typeof avatarUrl === 'string' && avatarUrl.length>0 ? 
+                            avatarUrl : require("@assets/img/login.jpg") } 
+                    alt="avatar" />
+                </Form.Item>
 
-            <Form.Item label="用户名" >
-                <div className={usrinfoFormStyle.borderedLabel}>
-                    {profile.usrname}
-                </div>
-            </Form.Item>
+                <Form.Item label="用户名" >
+                    <div className={usrinfoFormStyle.borderedLabel}>
+                        {profile.usrname}
+                    </div>
+                </Form.Item>
 
-            <Form.Item label="手机号码" >
-                <div className={usrinfoFormStyle.borderedLabel}>
-                    {profile.telephone}
-                </div>
-            </Form.Item>
+                <Form.Item label="手机号码" >
+                    <div className={usrinfoFormStyle.borderedLabel}>
+                        {profile.telephone}
+                    </div>
+                </Form.Item>
 
-            <Form.Item label="性别" >
-                <div className={usrinfoFormStyle.borderedLabel}>
-                    {profile.sex ? '女' : '男'}
-                </div>
-            </Form.Item>
+                <Form.Item label="性别" >
+                    <div className={usrinfoFormStyle.borderedLabel}>
+                        {profile.sex ? '女' : '男'}
+                    </div>
+                </Form.Item>
 
-            <Form.Item {...editButtonLayout}>
-                <Button onClick={()=>handleEdit()} 
-                  size="middle" block icon={<EditOutlined />}
-                  className={usrinfoFormStyle.editButton}>
-                    编辑个人信息
-                </Button>
-            </Form.Item>
-        </Form>
-
-        <Form 
-          ref={editFormRef}
-          style={{
-              display: editing ? 'block' : 'none',
-          }}
-          {...layout}
-          onFinish={onEditFinish}
-        >
-            <Form.Item label="用户头像" >
-                <img className="avatar" height="120"
-                  src={ typeof avatarNew === 'string' && avatarNew.length>0 ? 
-                        avatarNew : require("@assets/img/login.jpg") } 
-                  alt="avatar" />
-                <Upload {...props} name='avatar'>
-                    <Button icon={<UploadOutlined />}
-                      className={usrinfoFormStyle.uploadButton}>
-                        点击上传
+                <Form.Item {...editButtonLayout}>
+                    <Button onClick={()=>handleEdit()} 
+                    size="middle" block icon={<EditOutlined />}
+                    id="editButton"
+                    className={usrinfoFormStyle.editButton}>
+                        编辑个人信息
                     </Button>
-                </Upload>
-            </Form.Item>
+                </Form.Item>
+            </Form>
+        :
+            <Form 
+            ref={editFormRef}
+            // style={{
+            //     display: editing ? 'block' : 'none',
+            // }}
+            className='editForm'
+            {...layout}
+            onFinish={onEditFinish}
+            >
+                <Form.Item label="用户头像" >
+                    <img className="avatar" height="120"
+                    src={ typeof avatarNew === 'string' && avatarNew.length>0 ? 
+                            avatarNew : require("@assets/img/login.jpg") } 
+                    alt="avatar" />
+                    <Upload {...props} name='avatar'>
+                        <Button icon={<UploadOutlined />}
+                        className={usrinfoFormStyle.uploadButton}>
+                            点击上传
+                        </Button>
+                    </Upload>
+                </Form.Item>
 
-            <Form.Item label="用户名" name="usrname" >
-                <Input />
-                {/* {
-                    this.props.form.getFieldDecorator('usrname', {
-                      rules: [
-                        { required: true, message: "请输入你的用户名" },
-                      ],
-                      initialValue: profile.usrname,
-                    })(<Input />)
-                } */}
-            </Form.Item>
+                <Form.Item label="用户名" name="usrname" >
+                    <Input />
+                    {/* {
+                        this.props.form.getFieldDecorator('usrname', {
+                        rules: [
+                            { required: true, message: "请输入你的用户名" },
+                        ],
+                        initialValue: profile.usrname,
+                        })(<Input />)
+                    } */}
+                </Form.Item>
 
-            <Form.Item label="手机号码" >
-                <Input disabled value={profile.telephone} />
-            </Form.Item>
+                <Form.Item label="手机号码" >
+                    <Input disabled value={profile.telephone} />
+                </Form.Item>
 
-            <Form.Item label="性别" name="sex" >
-                <Radio.Group buttonStyle="solid">
-                    <Radio className={usrinfoFormStyle.radioButton} value="0">男</Radio>
-                    <Radio className={usrinfoFormStyle.radioButton} value="1">女</Radio>
-                </Radio.Group>
-            </Form.Item>
+                <Form.Item label="性别" name="sex" >
+                    <Radio.Group buttonStyle="solid">
+                        <Radio className={usrinfoFormStyle.radioButton} value="0">男</Radio>
+                        <Radio className={usrinfoFormStyle.radioButton} value="1">女</Radio>
+                    </Radio.Group>
+                </Form.Item>
 
-            <Form.Item {...saveButtonLayout}>
-                <Button type="primary" onClick={()=>handleCancelEdit()} 
-                  size="middle" style={{marginRight: '20px'}}
-                  className={usrinfoFormStyle.saveButton}>
-                    取 消
-                </Button>
-                <Button type="primary" htmlType="submit" 
-                  size="middle" className={usrinfoFormStyle.saveButton}>
-                    保 存
-                </Button>
-            </Form.Item>
-        </Form>
+                <Form.Item {...saveButtonLayout}>
+                    <Button type="primary" size="middle" 
+                    id="cancelButton"
+                    className={usrinfoFormStyle.saveButton}
+                    style={{marginRight: '20px'}}
+                    onClick={()=>handleCancelEdit()}>
+                        取 消
+                    </Button>
+                    <Button type="primary" htmlType="submit" 
+                    size="middle" id="saveButton"
+                    className={usrinfoFormStyle.saveButton}>
+                        保 存
+                    </Button>
+                </Form.Item>
+            </Form>
+        }
       </div> 
     );
 });

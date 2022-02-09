@@ -5,7 +5,7 @@ import { ComparisonWrapper, PageWrapper, SectionWrapper } from './style';
 export default memo(function Intro(props) {
     return (
         <PageWrapper>
-            <div>
+            <div className='introPage'>
                 <br></br>
                 <h2>
                     超分辨率技术（Super-Resolution）

@@ -1,6 +1,5 @@
 import request from './request';
 import { message } from 'antd';
-import { List } from 'antd/lib/form/Form';
 
 export const getCount = () => {
     return request({
@@ -30,13 +29,13 @@ export const getHistList = async() => {
             return response.data;
         }
         else {
-            message.error("获取历史记录失败");
+            throw new Error('getHistPage statusCode' + response.statusCode);
         }
     }
     else {
-        message.error("获取历史记录失败");
+        throw new Error('getCount statusCode' + res.statusCode);
     }
-    return [];
+    //return [];
 };
 
 export const deleteHist = (historyId) => {

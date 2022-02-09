@@ -1,0 +1,490 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`main header render main header with login should match snapshot 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <BrowserRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <Memo(MainHeader)>
+        <ErrorBoundary>
+          <styled.div>
+            <div
+              className="sc-bdvvtL TCZnK"
+            >
+              <div
+                className="logo-menu"
+              >
+                <img
+                  alt="logo"
+                  className="logo"
+                  src={Object {}}
+                />
+              </div>
+              <div
+                className="nav-left"
+              >
+                <NavLink
+                  activeClassName="active-link"
+                  className="header-link"
+                  id="toTransPage"
+                  key="超分转换"
+                  to="/main/transform"
+                >
+                  <Link
+                    aria-current={null}
+                    className="header-link"
+                    id="toTransPage"
+                    to={
+                      Object {
+                        "hash": "",
+                        "pathname": "/main/transform",
+                        "search": "",
+                        "state": null,
+                      }
+                    }
+                  >
+                    <LinkAnchor
+                      aria-current={null}
+                      className="header-link"
+                      href="/main/transform"
+                      id="toTransPage"
+                      navigate={[Function]}
+                    >
+                      <a
+                        aria-current={null}
+                        className="header-link"
+                        href="/main/transform"
+                        id="toTransPage"
+                        onClick={[Function]}
+                      >
+                        <i>
+                          超分转换
+                        </i>
+                      </a>
+                    </LinkAnchor>
+                  </Link>
+                </NavLink>
+                <NavLink
+                  activeClassName="active-link"
+                  className="header-link"
+                  id="toIntroPage"
+                  key="功能简介"
+                  to="/main/discribe"
+                >
+                  <Link
+                    aria-current={null}
+                    className="header-link"
+                    id="toIntroPage"
+                    to={
+                      Object {
+                        "hash": "",
+                        "pathname": "/main/discribe",
+                        "search": "",
+                        "state": null,
+                      }
+                    }
+                  >
+                    <LinkAnchor
+                      aria-current={null}
+                      className="header-link"
+                      href="/main/discribe"
+                      id="toIntroPage"
+                      navigate={[Function]}
+                    >
+                      <a
+                        aria-current={null}
+                        className="header-link"
+                        href="/main/discribe"
+                        id="toIntroPage"
+                        onClick={[Function]}
+                      >
+                        <i>
+                          功能简介
+                        </i>
+                      </a>
+                    </LinkAnchor>
+                  </Link>
+                </NavLink>
+              </div>
+              <div
+                className="usr-menu"
+              >
+                <Dropdown
+                  mouseEnterDelay={0.15}
+                  mouseLeaveDelay={0.1}
+                  overlay={[Function]}
+                >
+                  <ForwardRef(Dropdown)
+                    mouseEnterDelay={0.15}
+                    mouseLeaveDelay={0.1}
+                    overlay={[Function]}
+                    overlayClassName=""
+                    placement="bottomLeft"
+                    prefixCls="ant-dropdown"
+                    transitionName="ant-slide-up"
+                  >
+                    <Trigger
+                      action={
+                        Array [
+                          "hover",
+                        ]
+                      }
+                      afterPopupVisibleChange={[Function]}
+                      autoDestroy={false}
+                      blurDelay={0.15}
+                      builtinPlacements={
+                        Object {
+                          "bottomCenter": Object {
+                            "offset": Array [
+                              0,
+                              4,
+                            ],
+                            "overflow": Object {
+                              "adjustX": 1,
+                              "adjustY": 1,
+                            },
+                            "points": Array [
+                              "tc",
+                              "bc",
+                            ],
+                            "targetOffset": Array [
+                              0,
+                              0,
+                            ],
+                          },
+                          "bottomLeft": Object {
+                            "offset": Array [
+                              0,
+                              4,
+                            ],
+                            "overflow": Object {
+                              "adjustX": 1,
+                              "adjustY": 1,
+                            },
+                            "points": Array [
+                              "tl",
+                              "bl",
+                            ],
+                            "targetOffset": Array [
+                              0,
+                              0,
+                            ],
+                          },
+                          "bottomRight": Object {
+                            "offset": Array [
+                              0,
+                              4,
+                            ],
+                            "overflow": Object {
+                              "adjustX": 1,
+                              "adjustY": 1,
+                            },
+                            "points": Array [
+                              "tr",
+                              "br",
+                            ],
+                            "targetOffset": Array [
+                              0,
+                              0,
+                            ],
+                          },
+                          "topCenter": Object {
+                            "offset": Array [
+                              0,
+                              -4,
+                            ],
+                            "overflow": Object {
+                              "adjustX": 1,
+                              "adjustY": 1,
+                            },
+                            "points": Array [
+                              "bc",
+                              "tc",
+                            ],
+                            "targetOffset": Array [
+                              0,
+                              0,
+                            ],
+                          },
+                          "topLeft": Object {
+                            "offset": Array [
+                              0,
+                              -4,
+                            ],
+                            "overflow": Object {
+                              "adjustX": 1,
+                              "adjustY": 1,
+                            },
+                            "points": Array [
+                              "bl",
+                              "tl",
+                            ],
+                            "targetOffset": Array [
+                              0,
+                              0,
+                            ],
+                          },
+                          "topRight": Object {
+                            "offset": Array [
+                              0,
+                              -4,
+                            ],
+                            "overflow": Object {
+                              "adjustX": 1,
+                              "adjustY": 1,
+                            },
+                            "points": Array [
+                              "br",
+                              "tr",
+                            ],
+                            "targetOffset": Array [
+                              0,
+                              0,
+                            ],
+                          },
+                        }
+                      }
+                      defaultPopupVisible={false}
+                      destroyPopupOnHide={false}
+                      focusDelay={0}
+                      getDocument={[Function]}
+                      getPopupClassNameFromAlign={[Function]}
+                      hideAction={Array []}
+                      mask={false}
+                      maskClosable={true}
+                      mouseEnterDelay={0.15}
+                      mouseLeaveDelay={0.1}
+                      onPopupAlign={[Function]}
+                      onPopupVisibleChange={[Function]}
+                      overlay={[Function]}
+                      popup={[Function]}
+                      popupAlign={Object {}}
+                      popupClassName=""
+                      popupPlacement="bottomLeft"
+                      popupStyle={Object {}}
+                      popupTransitionName="ant-slide-up"
+                      prefixCls="ant-dropdown"
+                      showAction={Array []}
+                      stretch="minWidth"
+                    >
+                      <div
+                        className="ant-dropdown-trigger drop-menu"
+                        data-testid="dropMenu"
+                        key="trigger"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                      >
+                        <img
+                          alt=""
+                          src={Object {}}
+                        />
+                        <ForwardRef(DownOutlined)
+                          className="icon"
+                        >
+                          <AntdIcon
+                            className="icon"
+                            icon={
+                              Object {
+                                "icon": Object {
+                                  "attrs": Object {
+                                    "focusable": "false",
+                                    "viewBox": "64 64 896 896",
+                                  },
+                                  "children": Array [
+                                    Object {
+                                      "attrs": Object {
+                                        "d": "M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z",
+                                      },
+                                      "tag": "path",
+                                    },
+                                  ],
+                                  "tag": "svg",
+                                },
+                                "name": "down",
+                                "theme": "outlined",
+                              }
+                            }
+                          >
+                            <span
+                              aria-label="down"
+                              className="anticon anticon-down icon"
+                              role="img"
+                            >
+                              <IconReact
+                                icon={
+                                  Object {
+                                    "icon": Object {
+                                      "attrs": Object {
+                                        "focusable": "false",
+                                        "viewBox": "64 64 896 896",
+                                      },
+                                      "children": Array [
+                                        Object {
+                                          "attrs": Object {
+                                            "d": "M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z",
+                                          },
+                                          "tag": "path",
+                                        },
+                                      ],
+                                      "tag": "svg",
+                                    },
+                                    "name": "down",
+                                    "theme": "outlined",
+                                  }
+                                }
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  data-icon="down"
+                                  fill="currentColor"
+                                  focusable="false"
+                                  height="1em"
+                                  key="svg-down"
+                                  viewBox="64 64 896 896"
+                                  width="1em"
+                                >
+                                  <path
+                                    d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                                    key="svg-down-svg-0"
+                                  />
+                                </svg>
+                              </IconReact>
+                            </span>
+                          </AntdIcon>
+                        </ForwardRef(DownOutlined)>
+                      </div>
+                    </Trigger>
+                  </ForwardRef(Dropdown)>
+                </Dropdown>
+              </div>
+            </div>
+          </styled.div>
+          <Memo(Login)>
+            <Modal
+              confirmLoading={false}
+              footer={null}
+              okType="primary"
+              onCancel={[Function]}
+              title="Super Resolution"
+              visible={false}
+              width={520}
+            >
+              <Dialog
+                closeIcon={
+                  <span
+                    className="ant-modal-close-x"
+                  >
+                    <ForwardRef(CloseOutlined)
+                      className="ant-modal-close-icon"
+                    />
+                  </span>
+                }
+                confirmLoading={false}
+                focusTriggerAfterClose={true}
+                footer={null}
+                maskTransitionName="ant-fade"
+                okType="primary"
+                onCancel={[Function]}
+                onClose={[Function]}
+                prefixCls="ant-modal"
+                title="Super Resolution"
+                transitionName="ant-zoom"
+                visible={false}
+                width={520}
+                wrapClassName=""
+              >
+                <PortalWrapper
+                  visible={false}
+                />
+              </Dialog>
+            </Modal>
+          </Memo(Login)>
+        </ErrorBoundary>
+      </Memo(MainHeader)>
+    </Router>
+  </BrowserRouter>
+</Provider>
+`;
+
+exports[`main header render main header without login should match snapshot 1`] = `
+<div
+  className="sc-bdvvtL TCZnK"
+>
+  <div
+    className="logo-menu"
+  >
+    <img
+      alt="logo"
+      className="logo"
+      src={Object {}}
+    />
+  </div>
+  <div
+    className="nav-left"
+  >
+    <a
+      aria-current={null}
+      className="header-link"
+      href="/main/transform"
+      id="toTransPage"
+      onClick={[Function]}
+    >
+      <i>
+        超分转换
+      </i>
+    </a>
+    <a
+      aria-current={null}
+      className="header-link"
+      href="/main/discribe"
+      id="toIntroPage"
+      onClick={[Function]}
+    >
+      <i>
+        功能简介
+      </i>
+    </a>
+  </div>
+  <div
+    className="usr-menu"
+  >
+    <div
+      className="login-link"
+      onClick={[Function]}
+    >
+      登录
+    </div>
+  </div>
+</div>
+`;
