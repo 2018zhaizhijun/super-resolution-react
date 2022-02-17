@@ -1,9 +1,10 @@
 import React, { memo, useState, useEffect } from 'react';
 import { Card, message } from 'antd';
 import { getHistList, deleteHist, deleteHistBatch } from '@service/history';
+import { downloadFile } from '@service/download';
 import histListStyle from './style.module.css';
 import { CloseOutlined } from '@ant-design/icons';
-import { BASE_URL } from '@service/config';
+import { BASE_URL, BASE_PATH, IMG_DOWNLOAD_API, VIDEO_DOWNLOAD_API } from '@service/config';
 
 function HistItem(props) {
     const { historyId, rawFile, processedFile, 
@@ -11,12 +12,16 @@ function HistItem(props) {
 
     const handleDownload = (fileUrl) => {
         let num = fileUrl.lastIndexOf('/')+1,
-            a = document.createElement("a"),
-            event = new MouseEvent("click");
-        let name = fileUrl.substring(num);
-        a.download = name;
-        a.href = fileUrl;
-        a.dispatchEvent(event);
+            name = fileUrl.substring(num);
+        downloadFile(mediaType, name);
+        // let num = fileUrl.lastIndexOf('/')+1,
+        //     form = document.createElement("form"),
+        //     event = new Event("submit");
+        // let name = fileUrl.substring(num);
+        // form.action = BASE_PATH + IMG_DOWNLOAD_API + '?filename=' + name;
+        // console.log(form.action);
+        // form.method = 'get';
+        // form.dispatchEvent(event);
     };
 
     const handleDelete = () => {
@@ -44,7 +49,8 @@ function HistItem(props) {
                         该浏览器不支持 video 播放，请下载后观看
                     </video>
                 }
-                <div onClick={()=>handleDownload(fileUrl)}>
+                <div className={ type == 'raw'?'conceal':'' }
+                 onClick={()=>handleDownload(fileUrl)}>
                     <span>下载</span>
                 </div>
             </Card.Grid>

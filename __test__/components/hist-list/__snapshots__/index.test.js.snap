@@ -53,6 +53,7 @@ exports[`actions about showing and deleting history items showing history list s
             src="http://101.35.24.184mock/rawMaterial"
           />
           <div
+            className="conceal"
             onClick={[Function]}
           >
             <span>
@@ -68,6 +69,7 @@ exports[`actions about showing and deleting history items showing history list s
             src="http://101.35.24.184mock/result"
           />
           <div
+            className=""
             onClick={[Function]}
           >
             <span>
@@ -131,6 +133,7 @@ exports[`actions about showing and deleting history items showing history list s
             该浏览器不支持 video 播放，请下载后观看
           </video>
           <div
+            className="conceal"
             onClick={[Function]}
           >
             <span>
@@ -148,6 +151,7 @@ exports[`actions about showing and deleting history items showing history list s
             该浏览器不支持 video 播放，请下载后观看
           </video>
           <div
+            className=""
             onClick={[Function]}
           >
             <span>

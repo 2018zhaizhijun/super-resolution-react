@@ -32,10 +32,10 @@ a {
     text-align: left;
 }
 
-.hidden {
-    display: none !important;
-}
-
 .conceal {
     visibility: hidden !important;
+}
+
+.hidden {
+    display: none !important;
 }
