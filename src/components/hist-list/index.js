@@ -1,10 +1,10 @@
 import React, { memo, useState, useEffect } from 'react';
 import { Card, message } from 'antd';
-import { getHistList, deleteHist, deleteHistBatch } from '@service/history';
+import { getHistList, deleteHist } from '@service/history';
 import { downloadFile } from '@service/download';
 import histListStyle from './style.module.css';
 import { CloseOutlined } from '@ant-design/icons';
-import { BASE_URL, BASE_PATH, IMG_DOWNLOAD_API, VIDEO_DOWNLOAD_API } from '@service/config';
+import { BASE_URL } from '@service/config';
 
 function HistItem(props) {
     const { historyId, rawFile, processedFile, 

@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState, useRef } from 'react';
 import { Upload, message } from 'antd';
 import { UploadOutlined, DeleteOutlined } from '@ant-design/icons';
 import { uploadImage, uploadVideo } from '@service/upload';
+import { downloadFile } from '@service/download';
 import { changeIsVisible } from '@components/login/store';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import { BASE_URL } from '@service/config';
@@ -12,7 +13,7 @@ const { Dragger } = Upload;
 export default memo(function TransBlock() {
     const [filelist, setFilelist] = useState([]);
     let fileListRef = useRef();
-    let draggerRef = useRef();
+    //let draggerRef = useRef();
     const dispatch = useDispatch();
     const { isLogin } = useSelector(
         state => ({
@@ -33,6 +34,22 @@ export default memo(function TransBlock() {
         const filelistNew = [...fileListRef.current, file];
         setFilelist(filelistNew);
         fileListRef.current = filelistNew;
+
+        const handleSuccess = (res) => {
+            //console.log(file);
+            onSuccess(res, file);
+            let filelistCopy = fileListRef.current.slice(0);
+            //console.log(filelistCopy);
+            for (let fileitem of filelistCopy) {
+                if (fileitem.uid === file.uid) {
+                    fileitem.url = BASE_URL+res.data[1];
+                    fileitem.processed = res.data[1].split('/').pop();
+                    fileitem.status = "done";
+                    setFilelist(filelistCopy);
+                    fileListRef.current = filelistCopy;
+                }
+            }
+        }
             
         if (fileType === 'image') {
             uploadImage(file, onUploadProgress).then((res) => {
@@ -40,18 +57,7 @@ export default memo(function TransBlock() {
                     throw new Error('uploadImage statusCode:' + res.statusCode);
                 }
                 setTimeout(() => {
-                    //console.log(file);
-                    onSuccess(res, file);
-                    let filelistCopy = fileListRef.current.slice(0);
-                    //console.log(filelistCopy);
-                    for (let fileitem of filelistCopy) {
-                        if (fileitem.uid === file.uid) {
-                            fileitem.url = BASE_URL+res.data[1];
-                            fileitem.status = "done";
-                            setFilelist(filelistCopy);
-                            fileListRef.current = filelistCopy;
-                        }
-                    }
+                    handleSuccess(res);
                 }, 12000);
             }).catch((e) => {
                 onError(e);
@@ -64,16 +70,7 @@ export default memo(function TransBlock() {
                     throw new Error('uploadVideo statusCode:' + res.statusCode);
                 }
                 setTimeout(() => {
-                    onSuccess(res, file);
-                    let filelistCopy = fileListRef.current.slice(0);
-                    for (let fileitem of filelistCopy) {
-                        if (fileitem.uid === file.uid) {
-                            fileitem.url = BASE_URL+res.data[1];
-                            fileitem.status = "done";
-                            setFilelist(filelistCopy);
-                            fileListRef.current = filelistCopy;
-                        }
-                    }
+                    handleSuccess(res);
                 }, 180*1000);
             }).catch((e) => {
                 onError(e);
@@ -129,41 +126,59 @@ export default memo(function TransBlock() {
         event.stopPropagation();
     };
     
-    useEffect(() => {
-        //let elem = document.getElementById('draggerWrapper');
-        let elem = draggerRef.current;
+    // 修改 ref.current 不会引发组件重新渲染，只能自己手动渲染。
+    // 比如在变更.current之后，再随便setState一个数据，这会使App再次执行。
+    // 所以这里设置的onClickCapture并没有起实际作用
+    // useEffect(() => {
+    //     //let elem = document.getElementById('draggerWrapper');
+    //     let elem = draggerRef.current;
 
-        if (!isLogin) {
-            //elem.addEventListener('click', eventHandler, true);
-            elem.onClickCapture = eventHandler;
-        }
-        else {
-            //removeEventListener中也要填入与addEventListener一样的useCapture参数
-            //elem.removeEventListener('click', eventHandler, true);
-            elem.onClickCapture = null;
-        }
+    //     if (!isLogin) {
+    //         //elem.addEventListener('click', eventHandler, true);
+    //         elem.onClickCapture = eventHandler;
+    //     }
+    //     else {
+    //         //removeEventListener中也要填入与addEventListener一样的useCapture参数
+    //         //elem.removeEventListener('click', eventHandler, true);
+    //         elem.onClickCapture = null;
+    //     }
 
-        return () => {
-            // try {
-            //     elem.removeEventListener('click', eventHandler, true);
-            // } catch(e) {}
-            elem.onClickCapture = null;
-        }
-    }, [isLogin]);
+    //     return () => {
+    //         // try {
+    //         //     elem.removeEventListener('click', eventHandler, true);
+    //         // } catch(e) {}
+    //         elem.onClickCapture = null;
+    //     }
+    // }, [isLogin]);
 
     useEffect(() => {
         fileListRef.current = filelist;
     });
 
-    const onChange = ({ file, fileList }) => {
+    const handleChange = ({ file, fileList }) => {
         console.log(file, fileList);
         setFilelist(fileList);
         fileListRef.current = fileList;
     };
 
+    const handleDownload = (file) => {
+        let ext = file.name.split('.').pop(),
+            mediaType;
+        if(ext=='jpg'||ext=='jpeg'||ext=='png')
+            mediaType = '0';
+        else if(ext=='mp4'||ext=='webm'||ext=='ogg')
+            mediaType = '1';
+        else {
+            message.error('不支持的文件格式：' + ext);
+            return;
+        }
+        downloadFile(mediaType, file.processed);
+    };
+
     return (
       <TransWrapper>
-        <div id="draggerWrapper" className="draggerArea" ref={draggerRef}>
+        <div id="draggerWrapper" className="draggerArea" //ref={draggerRef}
+         onClickCapture={ isLogin ? null : eventHandler }>
             <Dragger {...props}>
                 <p className="ant-upload-drag-icon">
                     <UploadOutlined />
@@ -181,7 +196,8 @@ export default memo(function TransBlock() {
             <Dragger 
               className="displayDragger"
               fileList={filelist} 
-              onChange={onChange}
+              onChange={handleChange}
+              onDownload={handleDownload}
               listType="picture"
               showUploadList={{
                 showDownloadIcon: true,

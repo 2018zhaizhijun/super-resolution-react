@@ -6,7 +6,7 @@ import 'nprogress/nprogress.css';
 NProgress.configure({showSpinner: false});
 
 const instance = axios.create({
-    //baseURL: BASE_URL,
+    baseURL: '/api',
     timeout: TIMEOUT,
     headers: {
         'content-type': 'application/json',
