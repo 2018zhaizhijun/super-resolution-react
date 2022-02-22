@@ -2,7 +2,9 @@
 
 该项目以Create-Reate-App脚手架创建，用craco覆盖webpack的配置。\
 实现超分辨率转换、登录、修改个人信息、查看历史记录等功能，是在原课程大作业项目的基础上用web重新实现，同时有一定的调整。\
-原项目文档：https://github.com/Shinichi618/Super-resolution
+原项目文档：https://github.com/Shinichi618/Super-resolution \
+\
+（由于之前使用的短信验证服务不稳定，后期接收不到短信，所以目前服务端无法注册，只能使用测试账号登录）
 
 ## npm操作
 
