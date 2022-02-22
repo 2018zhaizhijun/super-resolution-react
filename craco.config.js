@@ -1,7 +1,6 @@
 const CracoLessPlugin = require('craco-less');
 const path = require('path');
 const { whenProd } = require('@craco/craco');
-const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const pathResolve = pathUrl => path.join(__dirname, pathUrl);
@@ -15,28 +14,10 @@ module.exports = {
                 ...webpackConfig.output,
                 path: pathResolve('build'), 
                 filename: 'bundle.js',
-                publicPath: './', // webpack从该路径下寻找文件
+                publicPath: '/', // webpack从该路径下寻找文件
+                // publicPath设为“./”则用相对路径，在二级路由下请求资源以当前路由为参考
+                //   设为“/”则用绝对路径，在二级路由下请求资源以根路由为参考
             };
-            
-            // webpackConfig.module.rules = [
-            //     ...webpackConfig.module.rules,
-            //     {
-            //         test:/\.(htm|html)$/i,
-            //         use:['html-withimg-loader']
-            //     },
-            //     {
-            //         test: /\.(png|jpg|gif)$/,
-            //         use: [
-            //             {
-            //                 loader: 'file-loader',
-            //                 options: {
-            //                     esModule: false,
-            //                     outputPath: 'static/media'
-            //                 },
-            //             },
-            //         ],
-            //     }
-            // ];
             return webpackConfig; 
         },
         alias: {
@@ -53,24 +34,7 @@ module.exports = {
             '@utils': pathResolve('src/utils')
         },
         plugins:[ 
-            // new HtmlWebpackPlugin({
-            //     favicon: "./public/favicon.ico",
-            //     filename: "index.html",
-            //     manifest: "./public/manifest.json"
-            // }),
             ...whenProd(() => [
-                //打包build生成gizp压缩文件
-                // new CompressionWebpackPlugin({
-                //     algorithm: 'gzip',
-                //     test: new RegExp(
-                //         '\\.(' + 
-                //         ['js', 'css'].join('|') + 
-                //         ')$'
-                //     ),
-                //     threshold: 1024,
-                //     minRatio: 0.8 
-                // }),
-
                 //打包忽略console,debugger
                 new TerserPlugin({
                     cache: true,
@@ -130,7 +94,6 @@ module.exports = {
     //         secure: false,
     //     },
     //},
-    // 脚手架自带autoprefixer，不用额外配置
 };
 
 // npm run build 编译项目
