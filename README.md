@@ -23,8 +23,8 @@
 
 ## 部署到本地Nginx服务器
 
-nginx/nginx.conf文件针对BrowserRouter进行了配置，同时将api请求转发至Web服务器（https://github.com/Shinichi618/Super-resolution）\
+nginx/nginx.conf文件针对BrowserRouter进行了配置，同时将api请求转发至Web服务器（https://github.com/Shinichi618/Super-resolution） \
 \
 ·本地安装nginx，用该项目中的nginx/nginx.conf文件替换安装目录下的conf/nginx.conf\
 ·在nginx安装目录下执行nginx.exe启动反向代理，通过nginx.conf内配置的主机名+端口号访问页面\
-·执行nginx -s quit停止运行\
+·执行nginx -s quit停止运行
